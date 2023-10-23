@@ -1,5 +1,6 @@
 package com.example.questionProAssignment.model.entity;
 
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +17,7 @@ import jakarta.persistence.Id;
 @Table(name = "grocery_item")
 public class GroceryItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private double price;

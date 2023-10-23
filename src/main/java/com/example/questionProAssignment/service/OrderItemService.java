@@ -28,12 +28,10 @@ public class OrderItemService {
             GroceryItem groceryItem = groceryItemService.getGroceryItemById(item.getGroceryItemId())
                     .orElseThrow(() -> new ResourceNotFoundException("Grocery item not found with id: " + item.getGroceryItemId()));
 
-            // Check if the requested quantity is available
             if (groceryItem.getQuantity() < item.getQuantity()) {
                 throw new InsufficientInventoryException("Insufficient inventory for item: " + groceryItem.getName());
             }
 
-            // Deduct the ordered quantity from inventory
             groceryItem.setQuantity(groceryItem.getQuantity() - item.getQuantity());
             groceryItemService.updateGroceryItem(groceryItem.getId(), groceryItem);
 
@@ -42,7 +40,7 @@ public class OrderItemService {
 
         }
 
-//        order.setOrderItems(orderItems);
+        order.setOrderItems(orderItems);
         order.setTotalAmount(totalAmount);
 
         return orderRepository.save(order);
